@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מש"א 7000 - הנדסת העתיד</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- איפוס ועיצוב בסיסי --- */
+        :root {
+            --primary-color: #0a4a8f; /* כחול טכנולוגי */
+            --secondary-color: #f4f4f4; /* אפור בהיר רקע */
+            --dark-color: #222;
+            --light-color: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin-bottom: 15px;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* --- כותרת עליונה (Header) --- */
+        .main-header {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .main-header .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light-color);
+        }
+
+        .main-header nav a {
+            color: var(--light-color);
+            margin-right: 20px;
+            font-weight: 400;
+            transition: opacity 0.3s ease;
+        }
+
+        .main-header nav a:hover {
+            opacity: 0.7;
+        }
+
+        /* --- אזור כותרת ראשית (Hero) עם רקע מתחלף --- */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--light-color);
+            overflow: hidden; /* מסתיר את הרקע שגולש */
+        }
+
+        /* ----- האנימציה ----- */
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            
+            /* אנימציה: 24 שניות סה"כ (6 שניות לכל תמונה) */
+            animation: changeBackground 24s linear infinite;
+        }
+
+        @keyframes changeBackground {
+            0% { 
+                background-image: url('https://images.unsplash.com/photo-1504955322921-b3b34381c810?auto=format&fit=crop&w=1920&q=80');
+                opacity: 1;
+            }
+            20% { 
+                background-image: url('https://images.unsplash.com/photo-1504955322921-b3b34381c810?auto=format&fit=crop&w=1920&q=80');
+                opacity: 1;
+            }
+            25% { /* מתחיל fade out */
+                opacity: 0;
+            }
+            25.01% { /* מחליף תמונה כשהיא שקופה */
+                background-image: url('https://images.unsplash.com/photo-1581090444101-f3c0b4f8f4c3?auto=format&fit=crop&w=1920&q=80');
+            }
+            30% { /* עושה fade in */
+                opacity: 1;
+            }
+            45% {
+                background-image: url('https://images.unsplash.com/photo-1581090444101-f3c0b4f8f4c3?auto=format&fit=crop&w=1920&q=80');
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            50.01% {
+                background-image: url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1920&q=80');
+            }
+            55% {
+                opacity: 1;
+            }
+            70% {
+                background-image: url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1920&q=80');
+                opacity: 1;
+            }
+            75% {
+                opacity: 0;
+            }
+            75.01% {
+                background-image: url('https://images.unsplash.com/photo-1543349931-98b6710b379e?auto=format&fit=crop&w=1920&q=80');
+            }
+            80% {
+                opacity: 1;
+            }
+            95% {
+                opacity: 1;
+            }
+            100% { /* חוזר לתמונה הראשונה */
+                background-image: url('https://images.unsplash.com/photo-1504955322921-b3b34381c810?auto=format&fit=crop&w=1920&q=80');
+                opacity: 1;
+            }
+        }
+        /* ----- סוף אנימציה ----- */
+
+        .hero-content {
+            background: rgba(0, 0, 0, 0.5); /* שכבה כהה לשיפור קריאות */
+            padding: 40px 60px;
+            border-radius: 10px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--light-color);
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: transform 0.3s ease, background 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #083c74;
+            transform: scale(1.05);
+        }
+
+        /* --- אזורים פנימיים (אודות, מנכ"ל, צור קשר) --- */
+        .section {
+            padding: 80px 0;
+        }
+        
+        #about {
+            background: var(--light-color);
+        }
+
+        #ceo {
+            background: var(--secondary-color);
+        }
+        
+        .ceo-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 40px;
+        }
+        
+        .ceo-img {
+            flex-basis: 250px;
+            flex-shrink: 0;
+        }
+
+        .ceo-img img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 50%; /* עיגול מושלם */
+            border: 5px solid var(--primary-color);
+        }
+        
+        .ceo-text blockquote {
+            font-size: 1.3rem;
+            font-style: italic;
+            font-weight: 300;
+            border-right: 5px solid var(--primary-color);
+            padding-right: 20px;
+            margin: 0;
+        }
+        
+        .ceo-text strong {
+            display: block;
+            margin-top: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        /* --- טופס יצירת קשר --- */
+        #contact {
+            background: var(--light-color);
+        }
+
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 400;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            font-family: 'Heebo', sans-serif;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        textarea.form-control {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* --- פוטר --- */
+        .main-footer {
+            background: var(--dark-color);
+            color: var(--light-color);
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        .main-footer p {
+            margin: 0;
+            font-weight: 300;
+        }
+
+        /* --- רספונסיביות --- */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .main-header .container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .ceo-wrapper {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .ceo-text blockquote {
+                border-right: none;
+                border-top: 5px solid var(--primary-color);
+                padding-right: 0;
+                padding-top: 20px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <a href="#" class="logo">מש"א 7000</a>
+            <nav>
+                <a href="#about">אודות</a>
+                <a href="#ceo">דבר המנכ"ל</a>
+                <a href="#contact">צור קשר</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-background"></div> <div class="hero-content">
+                <h1>מש"א 7000</h1>
+                <p>מגדירים מחדש את תעשיית הרכב העולמית</p>
+                <a href="#contact" class="btn">צור קשר עכשיו</a>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2>אודות מש"א 7000</h2>
+                <p>
+                    מש"א 7000 אינו רק מפעל לייצור מכוניות; זהו מרכז חדשנות והנדסה מהמתקדמים בעולם. מאז הקמתנו, חרטנו על דגלנו את ערכי המצוינות, הדיוק והבטיחות. אנו משלבים טכנולוגיות ייצור רובוטיות מתקדמות עם עבודת אומן אנושית, כדי ליצור כלי רכב שהם לא רק אמצעי תחבורה, אלא יצירת אמנות הנדסית.
+                </p>
+                <p>
+                    פס הייצור שלנו, המשתרע על פני קילומטרים, פועל בסנכרון מושלם 24/7. אנו מתמחים בייצור רכבים חשמליים (EV) פורצי דרך, תוך שימוש בחומרים ברי קיימא והתמקדות בצמצום טביעת הרגל הפחמנית. החזון שלנו הוא להוביל את מהפכת התחבורה הנקייה, רכב אחד בכל פעם.
+                </p>
+            </div>
+        </section>
+
+        <section id="ceo" class="section">
+            <div class="container">
+                <h2>דבר המנכ"ל</h2>
+                <div class="ceo-wrapper">
+                    <div class="ceo-img">
+                        <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&w=300&q=80" alt="מנכ'ל מש'א 7000">
+                    </div>
+                    <div class="ceo-text">
+                        <blockquote>
+                            "במש"א 7000, אנחנו לא בונים רק מכוניות – אנחנו בונים את העתיד. כל בורג, כל שבב וכל קו עיצובי הם עדות למחויבות הבלתי מתפשרת שלנו לאיכות. האנשים שלנו הם המנוע האמיתי מאחורי ההצלחה הזו, ואני גאה להוביל צוות שדוחף את גבולות האפשרי מדי יום."
+                        </blockquote>
+                        <strong>יצחק כהן, מנכ"ל מש"א 7000</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container">
+                <h2>צרו איתנו קשר</h2>
+                <p style="text-align: center; max-width: 600px; margin: 0 auto 30px auto; font-weight: 300;">
+                    יש לכם שאלה? מעוניינים בשיתוף פעולה? השאירו פרטים ונציג שלנו יחזור אליכם בהקדם.
+                </p>
+                
+                <form name="contact" class="contact-form" method="POST" data-netlify="true">
+                    <div class="form-group">
+                        <label for="name">שם מלא</label>
+                        <input type="text" name="name" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">דוא"ל</label>
+                        <input type="email" name="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">טלפון</label>
+                        <input type="tel" name="phone" id="phone" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">הודעה</label>
+                        <textarea name="message" id="message" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">שלח הודעה</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>כל הזכויות שמורות © <span id="year"></span> מש"א 7000</p>
+        <script>
+            // סקריפט קטן שמעדכן את השנה אוטומטית בפוטר
+            document.getElementById('year').textContent = new Date().getFullYear();
+        </script>
+    </footer>
+
+</body>
+</html>
